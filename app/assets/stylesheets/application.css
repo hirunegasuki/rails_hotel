@@ -53,6 +53,30 @@ header .navMenu a {
     border: none;
     color: #fff;
 }
+.buttonContent {
+    border: none;
+    background: none;
+    display: flex;
+    align-items: center;
+    font-size: 18px;
+}
+.arrow {
+    width: 10px;
+    height: 10px;
+    border: 2px solid currentColor;
+    border-left: 0;
+    border-bottom: 0;
+    box-sizing: border-box;
+    transform: translateY(-25%) rotate(135deg);
+    margin-left: 16px;
+}
+.mypage {
+    display: none;
+}
+.mypage.is-open {
+    display: block;
+    z-index: 4;
+  }
 
 /* フラッシュメッセージ用 */
 .flashMessage > div {

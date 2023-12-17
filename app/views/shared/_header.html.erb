@@ -1,0 +1,37 @@
+<header>
+    <h1>Hotel</h1>
+
+    <nav class="navMenu">
+        <%if user_signed_in? %>
+          <button class="buttonContent" id="mypageButton">
+            <%= current_user.name %>
+            <i class="arrow" id="arrow"></i>
+          </button>
+          <div class="mypage" id="mypageDropdown">
+            <ul>
+              <li><%= link_to 'マイページ' %></li>
+              <li><%= link_to '配送先' %></li>
+              <li><%= link_to '注文履歴' %></li>
+              <li><%= link_to 'ログアウト', destroy_user_session_path, method: :delete %></li>
+            </ul>
+          </div>
+        <% else %>
+          <div class="buttonContent">
+            <%= link_to 'ログイン', new_user_session_path %>
+            <%= link_to '新規登録', new_user_registration_path, class: 'button primaryButton' %>
+          </div>
+        <% end %>
+    </nav>
+</header>
+
+<script>
+const mypageButton = document.getElementById("mypageButton");
+const mypageDropdown = document.getElementById("mypageDropdown");
+const arrow = document.getElementById("arrow");
+
+if (mypageButton){
+  mypageButton.addEventListener("click", () => {
+    mypageDropdown.classList.toggle("is-open");
+  });
+}
+</script>
