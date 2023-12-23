@@ -63,3 +63,9 @@ gem 'rails-i18n'
 
 # ユーザー登録・ログインの認証用
 gem 'devise'
+
+# 画像アップロード用
+gem 'carrierwave'
+
+# カレンダー用
+gem "simple_calendar", "~> 2.0"
