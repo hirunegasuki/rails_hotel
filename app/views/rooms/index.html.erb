@@ -1,0 +1,20 @@
+<%= render 'shared/header' %>
+
+<section class="fv">
+    <div>
+        <ul>
+        <% @rooms.each do |room| %>
+            <li>
+                <a href="rooms/<%= room.id %>">
+                    <div class="roomValue">
+                        <h3><%= room.name %></h3>
+                        <span><%= room.address %></span>
+                        <span><%= room.room_info %></span>
+                        <p><%= room.price %></p>
+                    </div>
+                </a>
+            </li>
+        <% end %>
+        </ul>
+    </div>
+</section>

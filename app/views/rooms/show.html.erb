@@ -1,0 +1,45 @@
+<%= render 'shared/header' %>
+
+<section class="fv">
+<%= render 'shared/flashmessage' %>
+
+    <a href="#reservation">予約に進む</a>
+
+    <div class="roomValue">
+        <h3><%= @room.name %></h3>
+        <span><%= @room.address %></span>
+        <span><%= @room.room_info %></span>
+        <p><%= @room.price %></p>
+    </div>
+
+    <div id="reservation">
+    <%= form_for @reservation, method: :post, url: reservations_confirm_path do |f| %>
+        <div class="formItem">
+            <%= f.label :check_in, "チェックイン", class: 'formLabel formRequired' %>
+            <%= f.text_field :check_in, placeholder: "日付を選択", class: 'itemContent' %>
+
+            <% if @reservation.errors.include?(:check_in) %>
+                <p class="formError"><%= @reservation.errors.full_messages_for(:check_in).first %>
+            <% end %>
+        </div>
+        <div class="formItem">
+            <%= f.label :check_out, "チェックアウト", class: 'formLabel formRequired' %>
+            <%= f.text_field :check_out, placeholder: "日付を選択", class: 'itemContent' %>
+
+            <% if @reservation.errors.include?(:check_out) %>
+                <p class="formError"><%= @reservation.errors.full_messages_for(:check_out).first %>
+            <% end %>
+        </div>
+        <div class="formItem">
+            <%= f.label :number, "人数", class: 'formLabel formRequired' %>
+            <%= f.number_field :number, placeholder: "0名", class: 'itemContent' %>
+
+            <% if @reservation.errors.include?(:number) %>
+                <p class="formError"><%= @reservation.errors.full_messages_for(:number).first %>
+            <% end %>
+        </div>
+
+        <%= f.submit "入力内容の確認", class: 'button primaryButton validCheck' %>
+    <% end %>
+    </div>
+</section>
