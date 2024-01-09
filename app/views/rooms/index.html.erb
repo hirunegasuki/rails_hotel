@@ -1,20 +1,29 @@
 <%= render 'shared/header' %>
 
 <section class="fv">
-    <div>
-        <ul>
-        <% @rooms.each do |room| %>
-            <li>
-                <a href="rooms/<%= room.id %>">
-                    <div class="roomValue">
-                        <h3><%= room.name %></h3>
-                        <span><%= room.address %></span>
-                        <span><%= room.room_info %></span>
-                        <p><%= room.price %></p>
-                    </div>
-                </a>
-            </li>
-        <% end %>
-        </ul>
+    <div class="message">
+        <p class="fvTitle">Pote Hotelで<br>まだ体験したことのない<br>旅をしよう</p>
+        <%= render 'shared/search' %>
     </div>
-</section>
+
+    <div class="recommendArea">
+        <h2>おすすめのエリア</h2>
+        <%= form_with(url: search_rooms_path, local: true, method: :get, class: "card") do |f| %>
+            <%= f.hidden_field :area, :value => "東京" %>
+            <%= f.submit "東京", class: "cardItem" %>
+        <% end %>
+        <%= form_with(url: search_rooms_path, local: true, method: :get, class: "card") do |f| %>
+            <%= f.hidden_field :area, :value => "大阪" %>
+            <%= f.submit "大阪", class: "cardItem" %>
+        <% end %>
+        <%= form_with(url: search_rooms_path, local: true, method: :get, class: "card") do |f| %>
+            <%= f.hidden_field :area, :value => "京都" %>
+            <%= f.submit "京都", class: "cardItem" %>
+        <% end %>
+        <%= form_with(url: search_rooms_path, local: true, method: :get, class: "card") do |f| %>
+            <%= f.hidden_field :area, :value => "福岡" %>
+            <%= f.submit "福岡", class: "cardItem" %>
+        <% end %>
+    </div>
+
+</section>  
