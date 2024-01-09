@@ -1,0 +1,45 @@
+<%= render 'shared/header' %>
+
+<section class="fv">
+  <div class="userContent">
+
+    <div class="formContainer">
+        <%= form_with model: @user, local: true do |f| %>
+            <div class="field">
+                <%= f.label :avatar, class: 'formLabel' %><br />
+
+                <% if @user.avatar? %>
+                    <%= image_tag @user.avatar.url, alt: "プロフィール画像", class: "iconImage iconSizeM" %></br>
+                <% else %>
+                    <%= image_tag 'noavatar.png', alt: "プロフィール画像", class: "iconImage iconSizeM" %></br>
+                <% end %>
+                <%= f.file_field :avatar %>
+            </div>
+
+            <div class="field">
+                <%= f.label :name, class: 'formLabel' %><br />
+                <%= f.text_field :name, class: 'itemContent' %>
+                
+                <% if @user.errors.include?(:name) %>
+                    <p class="formError"><%= @user.errors.full_messages_for(:name).first %>
+                <% end %>
+            </div>
+
+            <div class="field">
+                <%= f.label :profile, class: 'formLabel' %><br />
+                <%= f.text_field :profile, class: 'itemContent' %>
+
+                <% if @user.errors.include?(:profile) %>
+                    <p class="formError"><%= @user.errors.full_messages_for(:profile).first %>
+                <% end %>
+            </div>
+            
+            <div class="actions formButtonArea">
+                <%= link_to "キャンセル", :back %>
+                <%= f.submit "保存", class: 'button primaryButton' %>
+            </div>
+        <% end %>
+    </div>
+
+    </div>
+</section>

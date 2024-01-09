@@ -1,0 +1,29 @@
+<%= render 'shared/header' %>
+
+<section class="fv">
+    <div class="userContent">
+
+        <div class="formButtonArea">
+            <%= link_to "編集", edit_user_registration_path, class: "button secondaryButton" %>
+        </div>
+        <div class="userNav">
+            <%= link_to "アカウント", users_account_path, class: "active" %>
+            <%= link_to "プロフィール", users_profile_path %>
+        </div>
+
+        <table class="userInfo">
+            <tbody>
+                <tr>
+                    <th>メールアドレス</th>
+                    <td><%= @user.email %></td>
+                </tr>
+                <tr>
+                    <th>パスワード</th>
+                    <td>**********</td>
+                </tr>
+            </tbody>
+        </table>
+    
+    </div>
+
+</section>
