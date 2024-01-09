@@ -65,7 +65,4 @@ gem 'rails-i18n'
 gem 'devise'
 
 # 画像アップロード用
-gem 'carrierwave'
-
-# カレンダー用
-gem "simple_calendar", "~> 2.0"
+gem 'carrierwave', '~> 2.0'
