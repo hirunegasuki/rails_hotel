@@ -1,14 +1,30 @@
 ja:
  activerecord:
   models:
-   user: ユーザー
   attributes:
+
    user:
     name: ユーザー名
     email: メールアドレス
     password: パスワード
     password_confirmation: パスワード（確認用）
-  formats:
-   default: "%Y/%m/%d"
-   short: "%m/%d"
-   time: "%Y/%m/%d %H:%M"
+    avatar: アイコン画像
+    profile: 自己紹介
+
+   reservation:
+    name: 施設名
+    room_info: 施設詳細
+    price: 料金
+    address: 住所
+    check_in: チェックイン
+    check_out: チェックアウト
+    number: 人数
+ 
+   room:
+    name: 施設名
+    room_info: 施設詳細
+    price: 料金
+    address: 住所
+    check_in: チェックイン
+    check_out: チェックアウト
+    number: 人数
