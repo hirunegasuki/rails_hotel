@@ -7,15 +7,11 @@
     <%= csp_meta_tag %>
 
     <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
-    <%= stylesheet_link_tag 'signup', media: 'all' %>
+    <%= stylesheet_link_tag 'user', media: 'all' %>
     <%= javascript_pack_tag 'application', 'data-turbolinks-track': 'reload' %>
   </head>
 
   <body>
-    <% flash.each do |message_type, message| %>
-      <div class="flashMessage"><%= content_tag :div, message, class: message_type %></div>
-    <% end %>
-
     <%= yield %>
   </body>
 </html>
