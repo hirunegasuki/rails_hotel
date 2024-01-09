@@ -6,41 +6,33 @@
 
     <div class="reservationContent">
         <ul class="reservationInfo">
-        <% if @reservations.length > 0 %>       
+            <% if @reservations.count > 0 %>
             <% @reservations.each do |reservation| %>
                 <li>
                     <div class="heading">
                         <div class="headColumn">
                             <div class="dateContent">
-                                <span class="listLabel">チェックイン</span>
-                                <span class="listValue"><%= reservation.check_in %></span>
+                                <span>チェックイン：<%= l reservation.check_in %></span>
+                                <span>チェックアウト：<%= l reservation.check_out %></span>
                             </div>
-                            <div class="dateContent">
-                                <span class="listLabel">チェックアウト</span>
-                                <span class="listValue"><%= reservation.check_out %></span>
-                            </div>
-                        </div>
-                        <div class="headColumn">
-                            <div class="roomContent">
-                                <div class="roomImage">
-                                    <%= reservation.image %>
-                                </div>
-                                <h3><%= reservation.name %></h3>
-                                <p class="roomInfoValue"><%= reservation.room_info %></p>
+                            <div class="listcreate">
+                                <span>予約確定日時：<%= reservation.created_at.to_s(:datetime_jp) %></span>
                             </div>
                         </div>
-                        <div class="headColumn">
-                            <ul class="noticeContent">
-                                <li><%= reservation.total_price %></li>
-                                <li><%= reservation.created_at.to_s(:datetime_jp) %></li>
-                            <ul>
+                        <div class="boxColumn">
+                            <div class="roomImage"><%= image_tag reservation.room.image.url, alt: "施設画像" %></div>
+                            <div class="roomInfoContent">
+                                <h3><a href="/rooms/<%= reservation.room.id %>"><%= reservation.room.name %></a></h3>
+                                <p class="roomInfoValue"><%= reservation.room.room_info %></p>
+                                <p class="roomInfoValue">合計金額：¥<%= reservation.total_price %></p>
+                            </div>
                         </div>
                     </div>
                 </li>
             <% end %>
             <% else %>
-                <li class="reservationNone">予約はありません</li>
-        <% end %>
+                <p class="count">予約はありません</p>
+            <% end %>
         </ul>
     </div>
 </section>
