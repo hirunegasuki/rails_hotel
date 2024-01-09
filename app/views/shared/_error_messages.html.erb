@@ -1,0 +1,9 @@
+<% if @reservation.errors.any? %>
+    <div class="form_error">
+        <% @reservation.errors.full_messages.each do |message| %>
+            <ul>
+                <li><%= message %></li>
+            </ul>
+        <% end %>
+    </div>
+<% end %>
