@@ -1,0 +1,39 @@
+<%= render 'shared/header' %>
+
+<section class="fv">
+    <div class="userContent">
+
+        <div class="formButtonArea">
+            <%= link_to "編集", users_profile_edit_path, class: "button secondaryButton" %>
+        </div>
+        <div class="userNav">
+            <%= link_to "アカウント", users_account_path %>
+            <%= link_to "プロフィール", users_profile_path, class: "active" %>
+        </div>
+
+        <table class="userInfo">
+            <tbody>
+                <tr>
+                    <th>アイコン画像</th>
+                    <td>
+                        <% if @user.avatar? %>
+                            <%= image_tag @user.avatar.url, alt: "プロフィール画像", class: "iconImage iconSizeM" %></br>
+                        <% else %>
+                            <%= image_tag 'noavatar.png', alt: "プロフィール画像", class: "iconImage iconSizeM" %></br>
+                        <% end %>
+                    </td>
+                </tr>
+                <tr>
+                    <th>名前</th>
+                    <td><%= @user.name %></td>
+                </tr>
+                <tr>
+                    <th>自己紹介</th>
+                    <td><%= @user.profile %></td>
+                </tr>
+            </tbody>
+        </table>
+    
+    </div>
+
+</section>

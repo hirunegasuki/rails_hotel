@@ -1,0 +1,59 @@
+<div class="container">  
+  <h1>PoteTravel</h1>
+
+  <div class="form">
+    <div class="formInfo">  
+      <p>PoteTravel&nbsp;へようこそ</p>
+      <h2>新規アカウント登録</h2>
+    </div>
+
+    <div class="formContainer">
+      <%= form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f| %>
+      <% if @user.errors.any? %>
+      <% end %>
+
+        <div class="field">
+          <span class="formRequired">必須</span><%= f.label :name, class: 'formLabel' %><br>
+          <%= f.text_field :name, autofocus: true, placeholder: "ユーザー名を入力", class: 'itemContent' %>
+
+          <% if @user.errors.include?(:name) %>
+            <p class="formError"><%= @user.errors.full_messages_for(:name).first %>
+          <% end %>
+        </div>
+
+        <div class="field">
+          <span class="formRequired">必須</span><%= f.label :email, class: 'formLabel' %><br />
+          <%= f.text_field :email, autofocus: true, autocomplete: "email", placeholder: "メールアドレスを入力", class: 'itemContent' %>
+
+          <% if @user.errors.include?(:email) %>
+            <p class="formError"><%= @user.errors.full_messages_for(:email).first %>
+          <% end %>
+        </div>
+
+        <div class="field">
+          <span class="formRequired">必須</span><%= f.label :password, class: 'formLabel' %><br />
+          <%= f.text_field :password, autocomplete: "new-password", placeholder: "パスワードを入力", class: 'itemContent' %>
+        
+          <% if @user.errors.include?(:password) %>
+            <p class="formError"><%= @user.errors.full_messages_for(:password).first %>
+          <% end %>
+        </div>
+
+        <div class="field">
+          <span class="formRequired">必須</span><%= f.label :password_confirmation, class: 'formLabel' %><br />
+          <%= f.text_field :password_confirmation, autocomplete: "new-password", placeholder: "パスワード（確認用）を入力", class: 'itemContent' %>
+
+          <% if @user.errors.include?(:password_confirmation) %>
+            <p class="formError"><%= @user.errors.full_messages_for(:password_confirmation).first %>
+          <% end %>
+        </div>
+
+        <div class="actions">
+          <%= f.submit "アカウントを作成", class: 'button primaryButton' %>
+        </div>
+      <% end %>
+
+      <p class="anotherAction">アカウントをお持ちの方は<%= render "devise/shared/links" %></p>
+    </div>
+  </div>
+</div>

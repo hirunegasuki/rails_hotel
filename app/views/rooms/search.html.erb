@@ -1,0 +1,30 @@
+<%= render 'shared/header' %>
+
+<section class="fv">
+<%= render 'shared/search' %>
+    <div class="roomContent">
+        <% if @rooms.count > 0 %> 
+            <p class="count">検索結果：<%= @rooms.count %>件</p> 
+            <ul class="roomList">
+                <% @rooms.each do |room| %>
+                    <li>
+                        <a href="/rooms/<%= room.id %>" class="roomValue">
+                            <div class="roomImage"><%= image_tag room.image.url, alt: "施設画像" %></div>
+                            <div class="roomValueInfo">    
+                                <h3 class="ellipsis"><%= room.name %></h3>
+                                <span class="roomDescribeAddress"><%= room.address %></span>
+                                
+                                <div class="roomDescribe">
+                                    <p><%= room.room_info %></p>
+                                    <p class="roomDescribePrice">¥<span><%= room.price %></span>/泊</p>
+                                </div>
+                            </div>
+                        </a>
+                    </li>
+                <% end %>
+            </ul>
+        <% else %>
+            <p class="count">検索結果はありません</p>
+        <% end %>
+    </div>
+</section>

@@ -1,0 +1,29 @@
+<%= render 'shared/header' %>
+
+<section class="fv">
+    <h2>登録済みホテルの一覧</h2>
+
+    <div class="roomHistoryContent">
+        <ul class="roomHistoryInfo reservationInfo">
+        <% @rooms.each do |room| %>
+            <li>
+                <div class="heading">
+                    <div class="headColumn">
+                        <div class="listcreate">
+                            <span>作成日：<%= room.created_at.to_s(:datetime_jp) %></span>
+                        </div>
+                    </div>
+                    <div class="boxColumn">
+                        <div class="roomImage"><%= image_tag room.image.url, alt: "施設画像" %></div>
+                        <div class="roomInfoContent">
+                            <h3><a href="/rooms/<%= room.id %>"><%= room.name %></a></h3>
+                            <p class="roomInfoValue"><%= room.room_info %></p>
+                            <p class="roomInfoValue">料金：¥<span><%= room.price %></span>/泊</p>
+                        </div>
+                    </div>
+                </div>
+            </li>
+        <% end %>
+        </ul>
+    </div>
+</section>
