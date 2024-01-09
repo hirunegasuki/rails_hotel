@@ -1,17 +1,25 @@
 <header>
-    <h1>Hotel</h1>
+    <h1><a href="/">Pote Travel</a></h1>
 
     <nav class="navMenu">
         <%if user_signed_in? %>
           <button class="buttonContent" id="mypageButton">
-            <%= current_user.name %>
+            <% if @user.avatar? %>
+              <%= image_tag @user.avatar.url, alt: "プロフィール画像", class: "iconImage iconSizeS" %></br>
+            <% else %>
+              <%= image_tag 'noavatar.png', alt: "プロフィール画像", class: "iconImage iconSizeS" %></br>
+            <% end %>
+            <p><%= current_user.name %></p>
             <i class="arrow" id="arrow"></i>
           </button>
           <div class="mypage" id="mypageDropdown">
             <ul>
-              <li><%= link_to 'マイページ' %></li>
-              <li><%= link_to '配送先' %></li>
-              <li><%= link_to '注文履歴' %></li>
+              <li><%= link_to 'ホテルの登録', new_room_path %></li>
+              <li><%= link_to '登録済みホテルの一覧', own_rooms_path %></li>
+              <hr>
+              <li><%= link_to '予約履歴' %></li>
+              <hr>
+              <li><%= link_to 'アカウント', users_account_path %></li>
               <li><%= link_to 'ログアウト', destroy_user_session_path, method: :delete %></li>
             </ul>
           </div>
