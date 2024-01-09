@@ -3,8 +3,8 @@
 <section class="fv">
 <%= render 'shared/flashmessage' %>
     <div class="formContent">
-        <div class="form">
-            <%= form_with(model: @room, local: true) do |f| %>
+        <div class="roomForm formCommon">
+            <%= form_with model: @room, local: true do |f| %>
                 <div class="formItem">
                     <%= f.label :name, "施設名", class: 'formLabel formRequired' %>
                     <%= f.text_field :name, placeholder: "施設名を入力", class: 'itemContent' %>
@@ -23,7 +23,7 @@
                 </div>
                 <div class="formItem">
                     <%= f.label :price, "1日あたりの料金", class: 'formLabel formRequired' %>
-                    <%= f.text_field :price, placeholder: "料金を入力", class: 'itemContent' %>
+                    <span class="withUnit"><%= f.text_field :price, placeholder: "料金を入力", class: 'itemContent w50' %>円</span>
 
                     <% if @room.errors.include?(:price) %>
                         <p class="formError"><%= @room.errors.full_messages_for(:price).first %>
@@ -31,19 +31,21 @@
                 </div>
                 <div class="formItem">
                     <%= f.label :address, "住所", class: 'formLabel formRequired' %>
-                    <%= f.text_field :address, placeholder: "住所を入力", class: 'itemContent' %>
+                    <%= f.text_field :address, placeholder: "住所を入力（例：東京都千代田区1−1）", class: 'itemContent' %>
 
                     <% if @room.errors.include?(:address) %>
                         <p class="formError"><%= @room.errors.full_messages_for(:address).first %>
                     <% end %>
                 </div>
                 <div class="formItem">
-                    <%= f.label :image, "施設画像", class: 'formLabel formRequired' %>
-                    <%= f.file_field :image, class: 'itemContent' %>
+                    <%= f.label :image, "施設画像", class: 'formLabel' %>
+                    <%= f.file_field :image, class: 'itemContent imageContent' %>
                 </div>
             
+                <%= f.hidden_field :user_id, value: current_user.id %>
+                
                 <div class="formButtonArea">
-                    <%= link_to "キャンセル", rooms_path %>
+                    <%= link_to "キャンセル", :back %>
                     <%= f.submit "保存", class: 'button primaryButton validCheck' %>
                 </div>
             <% end %>
