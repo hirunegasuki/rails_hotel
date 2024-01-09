@@ -1,4 +1,7 @@
 class RoomsController < ApplicationController
+
+    before_action :set_user
+
     def index
         @rooms = Room.all
     end
@@ -9,39 +12,47 @@ class RoomsController < ApplicationController
 
     def create
         @room = Room.new(room_params)
+
         if @room.save
-            flash[:notice] = "施設を登録しました。"
-            redirect_to rooms_path
+            redirect_to "/rooms/#{@room.id}"
         else
-            flash.now[:alert] = "施設を登録できません。もう一度試してください。"
-            render :new
+            render "new"
         end
     end
 
     def show
-       # @rooms = Room.first
         @room = Room.find(params[:id])
         @reservation = Reservation.new
-       # render "rooms/own"
+        session[:previous_url] = request.referer
     end
-  
-    def edit
-        @room = Room.find(params[:id])
+
+    def search
+        @rooms = Room.where("address like ?", "%#{params[:area]}%")
+        
+        if params[:keyword].present?
+          @rooms = Room.where(['room_info LIKE(?) OR name LIKE(?)', "%#{params[:keyword]}%","%#{params[:keyword]}%"])
+        end 
+    end
+
+    def own
+        @rooms = Room.all
+        @room = Room.where(user_id: current_user.id)
+    end
+
+    def set_user
+        @user = current_user
     end
 
     private
-
     def room_params
         params.require(:room).permit(
-            :name,
-            :room_info,
-            :price,
-            :address,
-            :image
+            :name, 
+            :room_info, 
+            :price, 
+            :address, 
+            :image,
+            :user_id
         )
     end
 
-    #def own   
-    #    @room = Room.find(params[:id])     
-    #end
 end

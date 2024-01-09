@@ -3,43 +3,63 @@
 <section class="fv">
 <%= render 'shared/flashmessage' %>
 
-    <a href="#reservation">予約に進む</a>
-
-    <div class="roomValue">
-        <h3><%= @room.name %></h3>
-        <span><%= @room.address %></span>
-        <span><%= @room.room_info %></span>
-        <p><%= @room.price %></p>
+    <div class="prevNext">
+        <%= link_to :back do %>
+            <i class="actionIcon historyIcon"></i>戻る
+        <% end %>
+        <a href="#reservation" class="spOnly button secondaryButton">予約に進む</a>
     </div>
 
-    <div id="reservation">
-    <%= form_for @reservation, method: :post, url: reservations_confirm_path do |f| %>
-        <div class="formItem">
-            <%= f.label :check_in, "チェックイン", class: 'formLabel formRequired' %>
-            <%= f.text_field :check_in, placeholder: "日付を選択", class: 'itemContent' %>
-
-            <% if @reservation.errors.include?(:check_in) %>
-                <p class="formError"><%= @reservation.errors.full_messages_for(:check_in).first %>
-            <% end %>
-        </div>
-        <div class="formItem">
-            <%= f.label :check_out, "チェックアウト", class: 'formLabel formRequired' %>
-            <%= f.text_field :check_out, placeholder: "日付を選択", class: 'itemContent' %>
-
-            <% if @reservation.errors.include?(:check_out) %>
-                <p class="formError"><%= @reservation.errors.full_messages_for(:check_out).first %>
-            <% end %>
-        </div>
-        <div class="formItem">
-            <%= f.label :number, "人数", class: 'formLabel formRequired' %>
-            <%= f.number_field :number, placeholder: "0名", class: 'itemContent' %>
-
-            <% if @reservation.errors.include?(:number) %>
-                <p class="formError"><%= @reservation.errors.full_messages_for(:number).first %>
-            <% end %>
+    <div class="roomContent showLayout">
+        <div class="roomValue">
+            <div class="roomValueImage"><%= image_tag @room.image.url %></div>
+            <div class="roomValueInfo">
+                <h2><%= @room.name %></h2>
+                <span class="roomDescribeAddress"><%= @room.address %></span>
+                <div class="roomDescribe">
+                    <p><%= @room.room_info %></p>
+                    <p class="roomDescribePrice">料金：¥<span><%= @room.price %></span>/泊</p>
+                </div>
+            </div>
         </div>
 
-        <%= f.submit "入力内容の確認", class: 'button primaryButton validCheck' %>
-    <% end %>
+        <div id="reservation" class="reservationFormContent formCommon">
+            <h3>ホテルの予約</h3>
+            
+            <%= form_with model: @reservation, url: confirm_reservations_path, local: true do |f| %>
+                <div class="formItem">
+                    <%= f.label :check_in, "チェックイン", class: 'formLabel formRequired' %>
+                    <%= f.date_field :check_in, min: Date.current, placeholder: "日付を選択", class: 'itemContent' %>
+
+                    <% if @reservation.errors.include?(:check_in) %>
+                        <p class="formError"><%= @reservation.errors.full_messages_for(:check_in).first %>
+                    <% end %>
+                </div>
+                <div class="formItem">
+                    <%= f.label :check_out, "チェックアウト", class: 'formLabel formRequired' %>
+                    <%= f.date_field :check_out, min: Date.current, placeholder: "日付を選択", class: 'itemContent' %>
+
+                    <% if @reservation.errors.include?(:check_out) %>
+                        <p class="formError"><%= @reservation.errors.full_messages_for(:check_out).first %>
+                    <% end %>
+                </div>
+                <div class="formItem">
+                    <%= f.label :number, "人数", class: 'formLabel formRequired' %>
+                    <span class="withUnit"><%= f.number_field :number, placeholder: "0", class: 'itemContent' %>名</span>
+
+                    <% if @reservation.errors.include?(:number) %>
+                        <p class="formError"><%= @reservation.errors.full_messages_for(:number).first %>
+                    <% end %>
+                </div>
+            
+                <div class="formButtonArea">
+                    <%= f.submit "入力内容の確認", class: 'button primaryButton' %>
+                </div>
+
+                <%= f.hidden_field :room_id, :value => @room.id %>
+                <%= f.hidden_field :user_id, :value => @user.id %>
+            <% end %>
+            
+        </div>
     </div>
 </section>
