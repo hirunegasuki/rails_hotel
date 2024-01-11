@@ -1,0 +1,35 @@
+<%= render 'shared/header' %>
+
+<section class="fv">
+    <div class="confirmContent">
+    <h2>予約の確認</h2>
+        <dl>
+            <dt>チェックイン</dt>
+            <dd><%= l @reservation.check_in %></dd>
+
+            <dt>チェックアウト</dt>
+            <dd><%= l @reservation.check_out %></dd>
+
+            <dt>人数</dt>
+            <dd><%= @reservation.number %>人</dd>
+
+            <dt>宿泊日数</dt>
+            <dd><%= @reservation.total_day %>日</dd>
+
+            <dt>お支払い金額</dt>
+            <dd><span class="price">¥<%= @reservation.total_price %></span></dd>
+        </dl>
+
+        <%= form_with model: @reservation, url: reservations_path, local: true do |f| %>
+            <%= f.hidden_field :room_id %>
+            <%= f.hidden_field :user_id %>
+            <%= f.hidden_field :check_in %>
+            <%= f.hidden_field :check_out %>
+            <%= f.hidden_field :number %>
+
+            <%= link_to "キャンセル", :back, class: 'button secondaryButton' %>
+            <%= f.submit "予約を確定", class: 'button primaryButton' %>
+        <% end %>
+        
+    </div>
+</section>

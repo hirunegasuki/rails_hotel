@@ -1,0 +1,31 @@
+<div class="container">  
+  <h1>PoteTravel</h1>
+
+  <div class="form">
+    <h2>ログイン</h2>
+
+    <div class="formContainer">
+      <%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
+        <div class="field">
+          <%= f.label :email, class: 'formLabel' %><br />
+          <%= f.text_field :email, autofocus: true, autocomplete: "email", placeholder: "メールアドレスを入力", class: 'itemContent' %>
+        </div>
+
+        <div class="field">
+          <%= f.label :password, class: 'formLabel' %><br />
+          <%= f.text_field :password, autocomplete: "current-password", placeholder: "パスワードを入力", class: 'itemContent' %>
+
+          <%- if devise_mapping.recoverable? && controller_name != 'passwords' && controller_name != 'registrations' %>
+            <%= link_to "パスワードを忘れた方", new_password_path(resource_name), class: 'loginHelpItem' %>
+          <% end %>
+        </div>
+
+        <div class="actions">
+          <%= f.submit "ログイン", class: 'button primaryButton' %>
+        </div>
+      <% end %>
+
+      <p class="anotherAction">初めてご利用の方は<%= render "devise/shared/links" %></p>
+    </div>
+  </div>
+</div>

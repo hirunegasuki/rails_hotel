@@ -1,0 +1,11 @@
+<div class="formCommon">
+   <%= form_with(url: search_rooms_path, local: true, method: :get) do |f| %>
+        <div class="formItem w40">
+            <%= f.text_field :keyword, placeholder: "キーワードを入力", class: 'itemContent' %>
+        </div>
+        <div class="formItem w40">
+            <%= f.text_field :area, placeholder: "エリアを入力", class: 'itemContent' %>
+        </div>
+        <%= f.submit "検索", class: 'button primaryButton' %>
+    <% end %>
+</div>

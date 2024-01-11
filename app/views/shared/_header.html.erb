@@ -1,0 +1,45 @@
+<header>
+    <h1><a href="/">Pote Travel</a></h1>
+
+    <nav class="navMenu">
+        <%if user_signed_in? %>
+          <button class="buttonContent" id="mypageButton">
+            <% if @user.avatar? %>
+              <%= image_tag @user.avatar.url, alt: "プロフィール画像", class: "iconImage iconSizeS" %></br>
+            <% else %>
+              <%= image_tag 'noavatar.png', alt: "プロフィール画像", class: "iconImage iconSizeS" %></br>
+            <% end %>
+            <p><%= current_user.name %></p>
+            <i class="arrow" id="arrow"></i>
+          </button>
+          <div class="mypage" id="mypageDropdown">
+            <ul>
+              <li><%= link_to 'ホテルの登録', new_room_path %></li>
+              <li><%= link_to '登録済みホテルの一覧', own_rooms_path %></li>
+              <hr>
+              <li><%= link_to '予約履歴' %></li>
+              <hr>
+              <li><%= link_to 'アカウント', users_account_path %></li>
+              <li><%= link_to 'ログアウト', destroy_user_session_path, method: :delete %></li>
+            </ul>
+          </div>
+        <% else %>
+          <div class="buttonContent">
+            <%= link_to 'ログイン', new_user_session_path %>
+            <%= link_to '新規登録', new_user_registration_path, class: 'button primaryButton' %>
+          </div>
+        <% end %>
+    </nav>
+</header>
+
+<script>
+const mypageButton = document.getElementById("mypageButton");
+const mypageDropdown = document.getElementById("mypageDropdown");
+const arrow = document.getElementById("arrow");
+
+if (mypageButton){
+  mypageButton.addEventListener("click", () => {
+    mypageDropdown.classList.toggle("is-open");
+  });
+}
+</script>

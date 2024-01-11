@@ -1,0 +1,38 @@
+<%= render 'shared/header' %>
+
+<section class="fv">
+<%= render 'shared/flashmessage' %>
+    <h2>予約履歴</h2>
+
+    <div class="reservationContent">
+        <ul class="reservationInfo">
+            <% if @reservations.count > 0 %>
+            <% @reservations.each do |reservation| %>
+                <li>
+                    <div class="heading">
+                        <div class="headColumn">
+                            <div class="dateContent">
+                                <span>チェックイン：<%= l reservation.check_in %></span>
+                                <span>チェックアウト：<%= l reservation.check_out %></span>
+                            </div>
+                            <div class="listcreate">
+                                <span>予約確定日時：<%= reservation.created_at.to_s(:datetime_jp) %></span>
+                            </div>
+                        </div>
+                        <div class="boxColumn">
+                            <div class="roomImage"><%= image_tag reservation.room.image.url, alt: "施設画像" %></div>
+                            <div class="roomInfoContent">
+                                <h3><a href="/rooms/<%= reservation.room.id %>"><%= reservation.room.name %></a></h3>
+                                <p class="roomInfoValue"><%= reservation.room.room_info %></p>
+                                <p class="roomInfoValue">合計金額：¥<%= reservation.total_price %></p>
+                            </div>
+                        </div>
+                    </div>
+                </li>
+            <% end %>
+            <% else %>
+                <p class="count">予約はありません</p>
+            <% end %>
+        </ul>
+    </div>
+</section>

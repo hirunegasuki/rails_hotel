@@ -1,0 +1,57 @@
+<%= render 'shared/header' %>
+
+<section class="fv">
+  <div class="userContent">
+
+    <div class="formContainer">
+      <%= form_for(resource, as: resource_name, url: registration_path(resource_name), html: { method: :put }) do |f| %>
+
+        <div class="field">
+          <%= f.label :email, class: 'formLabel' %><br />
+          <%= f.email_field :email, autofocus: true, autocomplete: "email", class: 'itemContent' %>
+
+          <% if @user.errors.include?(:email) %>
+              <p class="formError"><%= @user.errors.full_messages_for(:email).first %>
+          <% end %>
+        </div>
+
+        <% if devise_mapping.confirmable? && resource.pending_reconfirmation? %>
+          <div>Currently waiting confirmation for: <%= resource.unconfirmed_email %></div>
+        <% end %>
+
+        <div class="field">
+          <%= f.label :password, class: 'formLabel' %><br />
+          <%= f.password_field :password, autocomplete: "new-password", class: 'itemContent' %>
+          
+          <% if @user.errors.include?(:password) %>
+              <p class="formError"><%= @user.errors.full_messages_for(:password).first %>
+          <% end %>
+        </div>
+
+        <div class="field">
+          <%= f.label :password_confirmation, class: 'formLabel' %><br />
+          <%= f.password_field :password_confirmation, autocomplete: "new-password", class: 'itemContent' %>
+
+          <% if @user.errors.include?(:password_confirmation) %>
+              <p class="formError"><%= @user.errors.full_messages_for(:password_confirmation).first %>
+          <% end %>
+        </div>
+
+        <div class="field">
+          <%= f.label :current_password, class: 'formLabel' %><br />
+          <%= f.password_field :current_password, autocomplete: "current-password", class: 'itemContent' %>
+
+          <% if @user.errors.include?(:current_password) %>
+              <p class="formError"><%= @user.errors.full_messages_for(:current_password).first %>
+          <% end %>
+        </div>
+
+        <div class="actions formButtonArea">
+          <%= link_to "キャンセル", :back %>
+          <%= f.submit "保存", class: 'button primaryButton' %>
+        </div>
+      <% end %>
+    </div>
+
+  </div>
+</section>
