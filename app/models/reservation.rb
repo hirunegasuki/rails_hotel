@@ -9,7 +9,7 @@ class Reservation < ApplicationRecord
         return false if check_out.blank? || check_in.blank?
         
         errors.add(:check_out, "はチェックイン日より後の日付を指定ください") unless
-        self.check_in <= self.check_out
+        self.check_in < self.check_out
     end
 
     def total_day
